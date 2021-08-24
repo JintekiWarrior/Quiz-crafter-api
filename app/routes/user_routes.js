@@ -50,6 +50,7 @@ router.post('/sign-up', (req, res, next) => {
     .catch(next)
 })
 
+// Sign In
 router.post('/sign-in', (req, res, next) => {
   const pw = req.body.credentials.password
   let user
@@ -84,6 +85,33 @@ router.post('/sign-in', (req, res, next) => {
     .then(user => res.status(201).json({ user: user.toObject() }))
     // check for errors using middleWare
     .catch(next)
+})
+
+// Change Password
+router.patch('/change-password', requireToken, (req, res, next) => {
+  let user
+  User.findById(req.user.id)
+  // save the user
+  .then(record => { user = record })
+  // check the old password is correct
+  .then(() => bcrypt.compare(req.body.passwords.old, user.hashedPassword))
+  // check for any info missing errors
+  .then(correctPassword => {
+    if (!req.body.passwords.new || !correctPassword) {
+      throw new BadParamsError()
+    }
+  })
+  // hash new password
+  .then(() => bcrypt.hash(req.body.passwords.new, 10))
+  // set and save new hashed password
+  .then(hash => {
+    user.hashedPassword = hash
+    return user.save()
+  })
+  // send status
+  .then(() => res.sendStatus(204))
+  // check for any errors
+  .catch(next)
 })
 
 module.exports = router
