@@ -3,9 +3,12 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 
 // custom middleware functions
-const errorHandler = require('./lib/error_handler')
-const requestLogger = require('./lib/request_logger')
-const auth = require('./lib/auth')
+const errorHandler = require('./app/lib/error_handler')
+const requestLogger = require('./app/lib/request_logger')
+const auth = require('./app/lib/auth')
+
+// custome router
+const userRoutes = require('./app/routes/user_routes')
 
 const app = express()
 let port = process.env.PORT || 8080
@@ -23,6 +26,9 @@ app.use(auth)
 app.use(requestLogger)
 
 app.use(cors())
+
+// routes middleware
+app.use(userRoutes)
 
 // Last step in middleware
 app.use(errorHandler)

@@ -4,7 +4,7 @@ module.exports = function (err, req, res, next) {
   // make sure we are not in a test environment
   if (!process.envTESTENV) {
     // run a time stamp
-    console.log('/n', new Date()toTimeString() + ':')
+    console.log('/n', new Date().toTimeString() + ':')
     // log the original error
     console.log(err)
   }
