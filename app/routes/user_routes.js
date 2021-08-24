@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 // security packages
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const crypto = require('crypto')
 const passport = require('passport')
 
