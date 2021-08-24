@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const mongoose = require('mongoose')
 
 // custom middleware functions
@@ -21,6 +22,9 @@ app.use(auth)
 
 app.use(requestLogger)
 
+app.use(cors())
+
+// Last step in middleware
 app.use(errorHandler)
 
 app.listen(port, () => {
