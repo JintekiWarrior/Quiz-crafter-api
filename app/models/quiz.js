@@ -1,7 +1,7 @@
 // Data base to store the questions and answers.
 const mongoose = require('mongoose')
 
-const quizSchema = mongoose.Schema({
+const quizSchema = new mongoose.Schema({
     question: {
         type: String,
         required: true
@@ -18,7 +18,13 @@ const quizSchema = mongoose.Schema({
 
     answerThree: {
         type: String
-    }
+    },
+
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+      }
 }, {
     timestamps: true
 })
