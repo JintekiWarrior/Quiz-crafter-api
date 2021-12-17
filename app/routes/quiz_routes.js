@@ -43,4 +43,18 @@ router.get('/quiz/:id', requireToken, async (req, res, next) => {
     }
 })
 
+// update quiz request handler
+router.patch('/quiz/:id', requireToken, async (req, res, next) => {
+    const quizId = req.params.id
+    const quizData = req.body.quiz 
+    delete req.body.quiz.owner 
+    try {
+        const quiz = await Quiz.findById(quizId)
+        const updatedQuiz = await quiz.updateOne(quizData, { new: true })
+        res.sendStatus(204)
+    } catch (error) {
+        return next(error)
+    }
+})
+
 module.exports = router
