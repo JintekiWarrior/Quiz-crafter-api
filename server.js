@@ -9,7 +9,8 @@ const auth = require('./app/lib/auth')
 
 // custome router
 const userRoutes = require('./app/routes/user_routes')
-const quizRoutes = require('./app/routes/quiz_routes.js')
+const quizRoutes = require('./app/routes/quiz_routes')
+const questionRoutes = require('./app/routes/question_routes')
 
 const app = express()
 let port = process.env.PORT || 8080
@@ -31,6 +32,7 @@ app.use(cors())
 // routes middleware
 app.use(userRoutes)
 app.use(quizRoutes)
+app.use(questionRoutes)
 
 // Last step in middleware
 app.use(errorHandler)

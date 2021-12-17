@@ -5,7 +5,6 @@ const mongoose = require('mongoose')
 const Quiz = require('./../models/quiz.js')
 
 const passport = require('passport')
-const quiz = require('./../models/quiz.js')
 const requireToken = passport.authenticate('bearer', { session: false })
 
 const router = express.Router()

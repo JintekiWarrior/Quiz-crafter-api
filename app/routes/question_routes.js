@@ -1,0 +1,28 @@
+const express = require('express')
+const mongoose = require('mongoose')
+
+const Question = require('./../models/question')
+const Quiz = require('./../models/quiz')
+
+const passport = require('passport')
+const requireToken = passport.authenticate('bearer', { session: false })
+
+const router = express.Router()
+
+
+// Question Create Request 
+router.post('/questions', requireToken, async (req, res, next) => {
+    const questionData = req.body.question 
+    const quizId = questionData.quizId 
+    try {
+        const quiz = await Quiz.findById(quizId)
+        const updatedQuiz = await quiz.questions.push(questionData)
+        res.status(201).json({ updatedQuiz })
+        return quiz.save()
+    } catch (error) {
+        return next(error)
+    }
+})
+
+
+module.exports = router
