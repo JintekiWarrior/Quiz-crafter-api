@@ -2,21 +2,12 @@
 const mongoose = require('mongoose')
 
 const quizSchema = new mongoose.Schema({
-    question: {
+    title: {
         type: String,
         required: true
     },
 
-    answerOne: {
-        type: String,
-        required: true
-    },
-
-    answerTwo: {
-        type: String
-    },
-
-    answerThree: {
+    description: {
         type: String
     },
 

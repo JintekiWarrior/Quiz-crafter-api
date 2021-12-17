@@ -22,4 +22,25 @@ router.post('/quiz', requireToken, async (req, res, next) => {
     }
 })
 
+// index quiz request handler 
+router.get('/quiz', async (req, res, next) => {
+    try {
+        const quiz = await Quiz.find()
+        res.status(200).json({ quiz })
+    } catch (error) {
+        return next(error)
+    }
+})
+
+// show quiz request handler 
+router.get('/quiz/:id', requireToken, async (req, res, next) => {
+    const quizId = req.params.id
+    try {
+        const quiz = await Quiz.findById(quizId)
+        res.status(200).json({ quiz })
+    } catch (error) {
+        return next(error)
+    }
+})
+
 module.exports = router
