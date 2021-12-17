@@ -24,5 +24,19 @@ router.post('/questions', requireToken, async (req, res, next) => {
     }
 })
 
+// Question Delete Request Handler
+router.delete('/questions/:id', requireToken, async (req, res, next) => {
+    const questionId = req.params.id 
+    const quizId = req.body.question.quizId 
+    try {
+        const quiz = await Quiz.findById(quizId)
+        await quiz.questions.id(questionId).remove()
+        res.sendStatus(204)
+        return quiz.save()
+    } catch (error) {
+        return next(error)
+    }
+})
+
 
 module.exports = router
