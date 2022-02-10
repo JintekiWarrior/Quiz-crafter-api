@@ -60,7 +60,7 @@ router.patch('/quiz/:id', requireToken, async (req, res, next) => {
 router.delete('/quiz/:id', requireToken, async (req, res, next) => {
     const quizId = req.params.id
     try {
-        const product = await Quiz.findById(quizId)
+        const quiz = await Quiz.findById(quizId)
         const deleteQuiz = await quiz.deleteOne()
         res.sendStatus(204)
     } catch (error) {
