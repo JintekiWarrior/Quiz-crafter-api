@@ -13,7 +13,7 @@ const quizRoutes = require('./app/routes/quiz_routes')
 const questionRoutes = require('./app/routes/question_routes')
 
 const app = express()
-let port = process.env.PORT || 8080
+let port = process.env.MONGODB_URI || 8080
 
 mongoose.connect('mongodb://localhost/quiz-crafter-db', {
   useNewUrlParser: true,
