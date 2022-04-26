@@ -15,7 +15,7 @@ const questionRoutes = require('./app/routes/question_routes')
 const app = express()
 let port = process.env.PORT || 8080
 
-mongoose.connect('mongodb://localhost/nodeJS-auth-template', {
+mongoose.connect('mongodb://localhost/quiz-crafter-db', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true
